@@ -1406,6 +1406,8 @@ expr expr::extract(unsigned high, unsigned low) const {
         return a.extract(high - b_bw, low - b_bw);
       if (low == 0)
         return a.extract(high - b_bw, 0).concat(b);
+      if (a.isConst())
+        return a.extract(high - b_bw, 0).concat(b.extract(b_bw-1, low));
     }
   }
   {
