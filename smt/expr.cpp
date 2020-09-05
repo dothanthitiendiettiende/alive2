@@ -543,6 +543,9 @@ expr expr::operator-(const expr &rhs) const {
 }
 
 expr expr::operator*(const expr &rhs) const {
+  uint64_t n, power;
+  if (rhs.isUInt(n) && is_power2(n, &power))
+    return *this << expr::mkUInt(power, rhs.sort());
   return binopc(Z3_mk_bvmul, operator*, Z3_OP_BMUL, isOne, isZero);
 }
 
