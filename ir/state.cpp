@@ -688,8 +688,9 @@ void State::mkAxioms(State &tgt) {
         quantified_vars.insert(undef_vars.begin(), undef_vars.end());
 
         if (reads2) {
-          auto restrict_ptrs = argmem2 ? &ptr_ins2 : nullptr;
-          auto data = mem.refined(mem2, true, restrict_ptrs);
+          auto restrict_ptrs = argmem ? &ptr_ins : nullptr;
+          auto restrict_ptrs2 = argmem ? &ptr_ins2 : nullptr;
+          auto data = mem.refined(mem2, true, restrict_ptrs, restrict_ptrs2);
           refines &= get<0>(data);
           quantified_vars.insert(get<2>(data).begin(), get<2>(data).end());
         }
