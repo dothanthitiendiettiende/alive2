@@ -37,8 +37,10 @@ class OrExpr {
   std::set<expr> exprs;
 
 public:
+  void add(const expr &e);
   void add(expr &&e);
   void add(const OrExpr &other);
+  bool contains(const expr &e) const;
   expr operator()() const;
   friend std::ostream &operator<<(std::ostream &os, const OrExpr &e);
 };
