@@ -509,7 +509,8 @@ State::addFnCall(const string &name, vector<StateValue> &&inputs,
     I->second
       = { move(values), expr::mkFreshVar(ub_name.c_str(), false),
           writes_memory
-            ? memory.mkCallState(argmemonly ? &I->first.args_ptr : nullptr,
+            ? memory.mkCallState(name,
+                                 argmemonly ? &I->first.args_ptr : nullptr,
                                  attrs.has(FnAttrs::NoFree))
             : Memory::CallState(),
           true };
